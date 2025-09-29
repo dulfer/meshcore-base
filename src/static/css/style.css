@@ -1,0 +1,23 @@
+.message-item {
+    border-bottom: 1px solid #eee;
+    padding: 10px 0;
+}
+
+.message-item:last-child {
+    border-bottom: none;
+}
+
+.message-content {
+    font-size: 1rem;
+    margin-bottom: 5px;
+}
+
+.message-meta {
+    font-size: 0.8rem;
+    color: #666;
+}
+
+#message-list {
+    max-height: 600px;
+    overflow-y: auto;
+}
