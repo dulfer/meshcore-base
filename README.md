@@ -21,29 +21,29 @@ meshcore-base/
 │   ├── templates/     # HTML templates
 │   └── database/      # Database models and migrations
 ├── Dockerfile         # Docker configuration
-├── requirements.txt   # Python dependencies
-└── pyproject.toml    # Poetry configuration
+└── pyproject.toml    # Poetry project configuration
 ```
 
 ## Development Setup
 
 1. Clone the repository
 
-2. Create and activate a virtual environment:
-
+2. Install Poetry if you haven't already:
    ```bash
-   python -m venv .venv
-   source .venv/bin/activate  # On Linux/macOS
-   .venv\Scripts\activate     # On Windows
+   curl -sSL https://install.python-poetry.org | python3 -
    ```
 
-3. Install the package in development mode:
-
+3. Install dependencies using Poetry:
    ```bash
-   pip install -e .
+   poetry install
    ```
 
-4. Run the development server:
+4. Activate the Poetry shell:
+   ```bash
+   poetry shell
+   ```
+
+5. Run the development server:
 
    ```bash
    python src/run.py
