@@ -1,6 +1,6 @@
 # MeshCore Web Client
 
-A modern web-based client for MeshCore communication, built with Python and Flask.
+A web-based client for MeshCore communication, built with Python and Flask. Requires a MeshCore Companion Radio USB connected to the host, or passed through to the docker container.  
 
 ## Features
 
@@ -29,22 +29,30 @@ meshcore-base/
 
 1. Clone the repository
 
-2. Install dependencies:
+2. Create and activate a virtual environment:
 
    ```bash
-   pip install -r requirements.txt
+   python -m venv .venv
+   source .venv/bin/activate  # On Linux/macOS
+   .venv\Scripts\activate     # On Windows
    ```
 
-   or with Poetry:
+3. Install the package in development mode:
 
    ```bash
-   poetry install
+   pip install -e .
    ```
 
-3. Run the development server:
+4. Run the development server:
 
    ```bash
-   flask run --port 3000
+   python src/run.py
+   ```
+
+   Or using Flask directly:
+
+   ```bash
+   FLASK_APP=meshcore_web.app flask run --port 3000
    ```
 
 ## Docker Deployment

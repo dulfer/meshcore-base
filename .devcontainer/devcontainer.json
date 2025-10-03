@@ -1,0 +1,17 @@
+{
+  "name": "MeshCore-Base Dev Container",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "settings": {
+    "python.pythonPath": "/usr/local/bin/python",
+    "terminal.integrated.defaultProfile.linux": "bash"
+  },
+  "extensions": [
+    "ms-python.python",
+    "ms-python.vscode-pylance"
+  ],
+  "forwardPorts": [8000],
+  "postCreateCommand": "poetry install",
+  "remoteUser": "vscode"
+}

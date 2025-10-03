@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <!-- Message List -->
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Messages</h5>
+            </div>
+            <div class="card-body" id="message-list">
+                {% for message in messages.items %}
+                <div class="message-item mb-3">
+                    <div class="message-content">{{ message.content }}</div>
+                    <div class="message-meta text-muted small">
+                        From: {{ message.sender_node }}
+                        {% if not message.is_public %}
+                        to: {{ message.receiver_node }}
+                        {% endif %}
+                        <br>
+                        {{ message.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="card-footer">
+                <nav aria-label="Message navigation">
+                    <ul class="pagination justify-content-center mb-0">
+                        {% if messages.has_prev %}
+                        <li class="page-item">
+                            <a class="page-link" href="{{ url_for('index', page=messages.prev_num) }}">Previous</a>
+                        </li>
+                        {% endif %}
+                        {% if messages.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="{{ url_for('index', page=messages.next_num) }}">Next</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <!-- Message Composer -->
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Send Message</h5>
+            </div>
+            <div class="card-body">
+                <form id="message-form">
+                    <div class="mb-3">
+                        <label for="message-type" class="form-label">Message Type</label>
+                        <select class="form-select" id="message-type">
+                            <option value="public">Public Message</option>
+                            <option value="private">Private Message</option>
+                        </select>
+                    </div>
+                    <div class="mb-3" id="contact-select" style="display: none;">
+                        <label for="contact" class="form-label">Send To</label>
+                        <select class="form-select" id="contact">
+                            {% for contact in contacts %}
+                            <option value="{{ contact.node_id }}">{{ contact.name or contact.node_id }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="message" class="form-label">Message</label>
+                        <textarea class="form-control" id="message" rows="3" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

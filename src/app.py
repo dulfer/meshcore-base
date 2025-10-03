@@ -14,7 +14,7 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///meshcore.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'dev-key-change-in-production')
-app.config['MESHCORE_PORT'] = os.environ.get('MESHCORE_PORT', '/dev/ttyUSB1')
+app.config['MESHCORE_PORT'] = os.environ.get('MESHCORE_PORT', '/dev/ttyUSB0')
 app.config['MESHCORE_BAUDRATE'] = int(os.environ.get('MESHCORE_BAUDRATE', '115200'))
 
 # Initialize database

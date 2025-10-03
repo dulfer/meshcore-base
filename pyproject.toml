@@ -3,12 +3,15 @@ name = "meshcore-web"
 version = "0.1.0"
 description = "A modern web client for MeshCore"
 authors = ["Your Name <your.email@example.com>"]
+packages = [
+    { include = "meshcore_web", from = "src" }
+]
 
 [tool.poetry.dependencies]
 python = "^3.9"
 Flask = "^3.0.0"
 SQLAlchemy = "^2.0.23"
-meshcore-py = "^1.0.0"
+meshcore = "^1.0.0"
 pyserial = "^3.5"
 python-dotenv = "^1.0.0"
 Flask-SQLAlchemy = "^3.1.1"
@@ -16,7 +19,7 @@ Flask-Login = "^0.6.3"
 Flask-WTF = "^1.2.1"
 gunicorn = "^21.2.0"
 
-[tool.poetry.dev-dependencies]
+[tool.poetry.group.dev.dependencies]
 pytest = "^7.4.3"
 black = "^23.9.1"
 flake8 = "^6.1.0"

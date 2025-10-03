@@ -13,13 +13,16 @@ RUN apt-get update && apt-get install -y \
     gcc \
     && rm -rf /var/lib/apt/lists/*
 
-# Install Python dependencies
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
-
 # Copy project files
+COPY pyproject.toml poetry.lock* ./
+
+# Install poetry and dependencies
+RUN pip install --no-cache-dir poetry && \
+    poetry config virtualenvs.create false && \
+    poetry install --no-dev
+
+# Copy application code
 COPY src/ /app/src/
-COPY pyproject.toml .
 
 # Create volume for SQLite database
 VOLUME /app/data
@@ -28,4 +31,4 @@ VOLUME /app/data
 EXPOSE ${PORT}
 
 # Run the application
-CMD ["gunicorn", "--bind", "0.0.0.0:3000", "src.app:app"]
+CMD ["gunicorn", "--bind", "0.0.0.0:3000", "meshcore_web.app:app"]
