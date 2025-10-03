@@ -8,7 +8,7 @@ packages = [
 ]
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = "^3.10"
 Flask = "^3.0.0"
 SQLAlchemy = "^2.0.23"
 meshcore = "^1.0.0"

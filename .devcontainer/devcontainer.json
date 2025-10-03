@@ -1,17 +1,44 @@
 {
   "name": "MeshCore-Base Dev Container",
   "build": {
-    "dockerfile": "Dockerfile"
+    "dockerfile": "Dockerfile",
+    "context": ".."
   },
-  "settings": {
-    "python.pythonPath": "/usr/local/bin/python",
-    "terminal.integrated.defaultProfile.linux": "bash"
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
+        "python.languageServer": "Pylance",
+        "python.linting.enabled": true,
+        "python.linting.flake8Enabled": true,
+        "python.formatting.provider": "black",
+        "python.testing.pytestEnabled": true,
+        "python.testing.unittestEnabled": false,
+        "python.testing.nosetestsEnabled": false,
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+          "source.organizeImports": "always"
+        },
+        "terminal.integrated.defaultProfile.linux": "bash"
+      },
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-python.black-formatter",
+        "njpwerner.autodocstring",
+        "visualstudioexptteam.vscodeintellicode",
+        "streetsidesoftware.code-spell-checker"
+      ]
+    }
   },
-  "extensions": [
-    "ms-python.python",
-    "ms-python.vscode-pylance"
-  ],
-  "forwardPorts": [8000],
+  "forwardPorts": [3080],
   "postCreateCommand": "poetry install",
-  "remoteUser": "vscode"
+  "containerEnv": {
+    "FLASK_APP": "src/run.py",
+    "FLASK_ENV": "development",
+    "FLASK_DEBUG": "1",
+    "PORT": "3080",
+    "PYTHONPATH": "${workspaceFolder}/src",
+    "DATABASE_URL": "sqlite:///data/meshcore.db"
+  }
 }
